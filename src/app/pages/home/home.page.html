@@ -1,0 +1,45 @@
+
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+    <ion-title>Home</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-menu-button menu="end-menu" autoHide="false">
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down-outline"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  
+  <ion-card *ngFor="let article of articles">
+    <img [src]="article.urlToImage || 'assets/img/no-image.png'" alt="imagen noticia" />
+
+    <ion-card-header>
+      <ion-card-title>{{ article.title }}</ion-card-title>
+      <ion-card-subtitle>
+        {{ article.author || article.source?.name }}
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ article.description }}
+    </ion-card-content>
+
+    <ion-button expand="block" fill="outline" color="primary" [href]="article.url" target="_blank">
+      Leer más
+      <ion-icon slot="end" name="open-outline"></ion-icon>
+    </ion-button>
+  </ion-card>
+</ion-content>
+
+
